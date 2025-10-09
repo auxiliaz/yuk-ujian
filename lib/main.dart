@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:yuk_ujian/login_screen.dart';
+import 'package:yuk_ujian/splash_screen.dart';
+import './list_ujian.dart';
 
-import 'package:get/get.dart';
+void main() => runApp(MyApp());
 
-import 'app/routes/app_pages.dart'; 
-
-void main() {
-  runApp(
-    GetMaterialApp(
-      title: "Application",
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
-    ),
-  );
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'YukUjian',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'Poppins',
+      ),
+    home: LoginScreen(),
+    );
+  }
 }
