@@ -1,135 +1,129 @@
-# YukUjian!
+# YukUjian! – Aplikasi Simulasi Ujian Sekolah
 
-YukUjian! is a frontend-only exam application built using **Flutter (Dart)**.  
-This application is designed to simulate a school exam system for **junior high school (SMP)** students, supporting two roles: **Student (Siswa)** and **Teacher (Guru)**.
-
-All data in this app is handled on the client side using dummy data and local storage for simulation purposes.
-
----
+YukUjian! adalah aplikasi simulasi ujian sekolah berbasis mobile yang dibangun menggunakan **Flutter (Dart)**.  
+Aplikasi ini dirancang untuk mensimulasikan sistem ujian tingkat **SMP**, dengan dua peran pengguna yaitu **Siswa** dan **Guru**. Seluruh data dikelola di sisi client menggunakan **dummy data** dan **local storage**, tanpa backend.
 
 ## Tech Stack
 
-- Flutter
-- Dart
+- Framework: Flutter
+- Bahasa: Dart
 - State Management: setState
-- Navigation: Navigator (MaterialPageRoute / named routes)
-- Local Storage (for saving created exams)
+- Navigation: Navigator
+- Storage: Local Storage
 
----
+## Menjalankan proyek
 
-## Application Flow
+Pastikan **Flutter SDK** sudah terpasang dan terkonfigurasi.
 
-### Splash & Onboarding
-1. Splash Screen is displayed when the app is opened
-2. Onboarding page introduces the app
-3. User taps **Get Started** to continue
+1. **Clone repository**
+```bash
+git clone https://github.com/auxiliaz/yuk-ujian.git
+cd yuk-ujian
+```
+1. **Install dependencies**
+```bash
+flutter pub get
+```
+1. **Jalankan aplikasi**
+```bash
+flutter run
+```
 
----
+## Fitur utama
 
-## Authentication Flow
+- Splash screen dan onboarding.
+- Registrasi dan login pengguna.
+- Pemilihan role pengguna (Siswa / Guru).
+- Alur ujian untuk siswa.
+- Manajemen ujian dan soal untuk guru.
+- Manajemen kelas dan nilai.
+- Halaman profil pengguna.
+- Logout dan penghapusan session.
 
-### Register
-1. User fills in:
-   - Name
-   - Date of birth
-   - Phone number
-   - Gender
-2. Continue registration by filling:
-   - Email
-   - Password
-3. User selects account type:
-   - Student (Siswa)
-   - Teacher (Guru)
+## Alur kerja aplikasi
 
-### Login
-- User logs in using email and password
-- App redirects user based on selected role
+1. **Splash & Onboarding**
+   - Saat aplikasi dibuka, splash screen ditampilkan.
+   - Pengguna diarahkan ke halaman onboarding.
+   - Tombol Get Started membawa pengguna ke halaman autentikasi.
 
----
+2. **Autentikasi Pengguna**
+   - Pengguna melakukan registrasi dengan mengisi data diri.
+   - Pengguna memilih tipe akun:
+     1. Siswa
+     2. Guru
+   - Login dilakukan menggunakan email dan password.
+   - Setelah login, pengguna diarahkan sesuai dengan role yang dipilih.
 
-## Student (Siswa) Flow
+   **Alur Pengguna Siswa**
+   1. Home Page
+      - Siswa memilih kelas (contoh: 9A, 9B).
+      - Halaman ini menjadi pintu masuk utama ke fitur ujian.
+   2. Daftar Ujian
+      - Menampilkan daftar ujian berdasarkan kelas yang dipilih.
+   3. Mulai Ujian
+      - Siswa mengisi nama dan kelas.
+      - Siswa mengerjakan soal ujian yang tersedia.
+   4. Halaman Nilai
+      - Menampilkan skor akhir setelah ujian selesai.
+   5. Halaman Kelas
+      - Menampilkan daftar mata pelajaran.
+      - Menampilkan nama siswa.
+      - Menampilkan nilai ujian yang telah dikerjakan.
+   6. Profil & Logout
+      - Siswa dapat mengubah data profil.
+      - Logout mengakhiri session dan kembali ke halaman login.
+      
+**Alur Pengguna Guru**
+   1. Home Page
+      - Menampilkan menu utama guru:
+        1. Ujian
+        2. Bank Soal
+        3. Kelas
+   2. Membuat Ujian
+      - Guru dapat:
+        1. Membuat judul ujian
+        2. Menambahkan soal
+        3. Memilih tipe soal (pilihan ganda / essay)
+        4. Melihat dan menghapus soal
+        5. Menyimpan ujian
+   3. Bank Soal
+      - Menampilkan daftar ujian dan soal yang telah dibuat.
+      - Guru dapat melihat detail dan mengedit soal.
+   4. Manajemen Kelas
+      - Guru dapat melihat daftar siswa.
+      - Guru dapat memasukkan nilai siswa.
+      - Guru dapat menambahkan kelas baru.
+   5. Profil & Logout
+      - Guru dapat mengubah data profil.
+      - Logout mengakhiri session dan kembali ke halaman login.
 
-### Home Page
-- Student selects their class (e.g. 9A, 9B)
-- Main entry point for accessing exams
+## Manajemen Data
 
-### Exam List Page
-- Displays list of available exams based on selected class
+- Seluruh data pengguna dan ujian dikelola di sisi frontend.
+- Data ujian yang dibuat guru disimpan menggunakan local storage.
+- Tidak terdapat backend atau database server.
+- Data bersifat lokal pada perangkat pengguna.   
 
-### Start Exam
-- Student enters:
-  - Name
-  - Class
-- Student starts the exam
+## Struktur penting
 
-### Score Page
-- Displays final exam score after submission
+- `lib/main.dart` – Entry point aplikasi.
+- `lib/pages/` – Halaman utama (Auth, Home, Ujian, Profil).
+- `lib/models/` – Model data pengguna dan ujian.
+- `lib/widgets/` – Komponen UI reusable.
 
-### Class Page
-- Displays list of subjects (mapel) the student is enrolled in
-- Shows student name
-- Displays scores after exams are completed
+## Keterbatasan Aplikasi
 
-### Profile
-- Edit profile information
+- Aplikasi bersifat frontend-only.
+- Autentikasi tidak aman untuk penggunaan produksi.
+- Ujian siswa belum tersinkron secara dinamis dengan ujian yang dibuat guru.
+- Data bergantung pada perangkat dan local storage.
 
-### Logout
-- Ends user session and returns to authentication flow
+## Tujuan Proyek
 
----
+Proyek ini dibuat untuk:
 
-## Teacher (Guru) Flow
-
-### Home Page
-- Main focus on:
-  - Exams
-  - Question Library
-  - Teacher’s Classes
-
-### Create Exam Page
-Teacher can:
-- Create exam title
-- Add questions
-- Choose question type:
-  - Multiple choice
-  - Essay
-- View list of added questions
-- Delete questions
-- Save exam
-
-### Question Library
-- Displays all saved exams and questions
-- View exam details
-- Edit existing questions
-
-### Class Page
-Teacher can:
-- View list of students
-- Input student scores
-- Add new classes
-
-### Profile
-- Edit profile information
-
-### Logout
-- Ends user session and returns to authentication flow
-
----
-
-## Data Management
-
-- User data and exam data are handled on the frontend
-- Created exams are stored using local storage
-- Exam data created by teachers is not yet synced to student exams
-- No backend or server-side database is used
-
----
-
-## Limitations
-
-- Frontend only (no backend integration)
-- Authentication is not secure for production use
-- Student exams do not dynamically reflect newly created teacher exams
-- Data is device-specific and stored locally
-
----
+1. Mensimulasikan sistem ujian sekolah.
+2. Melatih pembuatan aplikasi Flutter berbasis role pengguna.
+3. Memahami alur aplikasi ujian (siswa & guru).
+4. Menjadi proyek pembelajaran dan evaluasi teknis.
